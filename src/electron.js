@@ -12,7 +12,7 @@ function createWindow() {
     url.format({
       pathname: path.join(__dirname, `../dist/ffmpeg-frontend/browser/index.html`),
       protocol: 'file:',
-      slashes: true,
+      slashes: true
     })
   );
 }
