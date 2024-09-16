@@ -4,8 +4,8 @@
   "main": "src/electron.js",
   "scripts": {
     "ng": "ng",
-    "start": "electron-forge start",
-    "build": "ng build",
+    "start": "npm run build && electron-forge start",
+    "build": "ng build --base-href=./",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "package": "electron-forge package",
