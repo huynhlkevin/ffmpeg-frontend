@@ -1,15 +1,15 @@
 {
   "name": "ffmpeg-frontend",
   "version": "0.0.0",
-  "main": "src/electron.js",
+  "main": "dist/main.js",
   "scripts": {
-    "ng": "ng",
-    "start": "npm run build && electron-forge start",
-    "build": "ng build --base-href=./",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start:electron": "npm run build:electron && electron-forge start",
+    "build:electron": "tsc --project tsconfig.electron.json",
+    "build:angular": "ng build --base-href=./",
+    "debug": "npm run build:angular && concurrently --kill-others \"ng serve --watch --configuration development\" \"npm run start:electron\"",
+    "package": "npm run build:angular && npm run build:electron && electron-forge package",
+    "make": "electron-forge make",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +39,7 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "@types/jasmine": "~5.1.0",
+    "concurrently": "^9.0.1",
     "electron": "^32.0.2",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
