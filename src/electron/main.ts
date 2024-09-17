@@ -1,11 +1,16 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron/main';
 import url from 'url';
 import path from 'path';
 
+let mainWindow: any;
+
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   });
 
   if (app.isPackaged) {
@@ -22,7 +27,15 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  ipcMain.handle('openDirectoryDialog', () => openDirectoryDialog());
+  createWindow();
+});
+
+async function openDirectoryDialog() {
+  const result = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
+  return result.filePaths[0];
+}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
