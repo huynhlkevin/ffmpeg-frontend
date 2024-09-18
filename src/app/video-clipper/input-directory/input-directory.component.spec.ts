@@ -21,8 +21,8 @@ describe('InputDirectoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a property to store the input directory', () => {
-    expect(Object.keys(component)).toContain('inputDirectory')
+  it('should have a string property to store the input directory', () => {
+    expect(typeof component.inputDirectory).toBe('string');
   });
 
   it('should have a function to edit the input directory property', async () => {
