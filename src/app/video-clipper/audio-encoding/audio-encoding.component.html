@@ -1,0 +1,13 @@
+<section>
+  <fieldset>
+    <legend>Audio Encoding</legend>
+    <div>
+      <label for="codecSelect">Codec</label>
+      <select id="codecSelect" [(ngModel)]="codec">
+        @for (availableCodec of availableCodecs; track availableCodec) {
+          <option>{{availableCodec}}</option>
+        }
+      </select>
+    </div>
+  </fieldset>
+</section>
