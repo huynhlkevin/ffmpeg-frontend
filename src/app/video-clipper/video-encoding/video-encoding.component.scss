@@ -1,0 +1,19 @@
+section {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+}
+
+div {
+  display: flex;
+}
+
+label {
+  width: 5em;
+}
+
+label + * {
+  flex: 1;
+}
+
+
