@@ -1,13 +1,13 @@
-section {
+fieldset {
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 
-section > button {
+button {
   flex: none;
 }
 
-section > label {
+label {
   flex: 1;
 }
