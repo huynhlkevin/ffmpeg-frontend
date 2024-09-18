@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputDirectorySelectorComponent } from './input-directory-selector.component';
+import { InputDirectoryComponent } from './input-directory.component';
 
-describe('InputDirectorySelectorComponent', () => {
-  let component: InputDirectorySelectorComponent;
-  let fixture: ComponentFixture<InputDirectorySelectorComponent>;
+describe('InputDirectoryComponent', () => {
+  let component: InputDirectoryComponent;
+  let fixture: ComponentFixture<InputDirectoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputDirectorySelectorComponent]
+      imports: [InputDirectoryComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InputDirectorySelectorComponent);
+    fixture = TestBed.createComponent(InputDirectoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -27,7 +27,7 @@ describe('InputDirectorySelectorComponent', () => {
 
   it('should have a function to edit the input directory property', async () => {
     const directoryDialogServiceFake = { showOpenDialog: async () => 'test' };
-    component = new InputDirectorySelectorComponent(directoryDialogServiceFake);
+    component = new InputDirectoryComponent(directoryDialogServiceFake);
     await component.onChooseInputDirectory()
     expect(component.inputDirectory).toEqual('test')
   });

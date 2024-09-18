@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { InputDirectorySelectorComponent } from "./input-directory-selector/input-directory-selector.component";
+import { InputDirectoryComponent } from "./input-directory/input-directory.component";
 
 @Component({
   selector: 'app-video-clipper',
   standalone: true,
-  imports: [InputDirectorySelectorComponent],
+  imports: [InputDirectoryComponent],
   templateUrl: './video-clipper.component.html',
   styleUrl: './video-clipper.component.scss'
 })
