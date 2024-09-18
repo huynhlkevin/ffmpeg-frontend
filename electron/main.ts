@@ -1,8 +1,8 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron/main';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import url from 'url';
 import path from 'path';
 
-let mainWindow: any;
+let mainWindow: BrowserWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -16,7 +16,7 @@ function createWindow() {
   if (app.isPackaged) {
     mainWindow.loadURL(
       url.format({
-        pathname: path.join(__dirname, './ffmpeg-frontend/browser/index.html'),
+        pathname: path.join(__dirname, 'ffmpeg-frontend/browser/index.html'),
         protocol: 'file:',
         slashes: true
       })
@@ -28,14 +28,13 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  ipcMain.handle('openDirectoryDialog', () => openDirectoryDialog());
+  ipcMain.handle('showDirectoryDialog', async () => {
+    const result = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
+    return result.filePaths[0];
+  });
+
   createWindow();
 });
-
-async function openDirectoryDialog() {
-  const result = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
-  return result.filePaths[0];
-}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
