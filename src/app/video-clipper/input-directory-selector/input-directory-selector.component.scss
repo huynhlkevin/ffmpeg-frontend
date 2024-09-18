@@ -1,0 +1,13 @@
+section {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+section > button {
+  flex: none;
+}
+
+section > label {
+  flex: 1;
+}
