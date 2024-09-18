@@ -29,6 +29,6 @@ describe('InputDirectoryComponent', () => {
     const directoryDialogServiceFake = { showOpenDialog: async () => 'test' };
     component = new InputDirectoryComponent(directoryDialogServiceFake);
     await component.onChooseInputDirectory()
-    expect(component.inputDirectory).toEqual('test')
+    expect(component.inputDirectory).toBe('test')
   });
 });
