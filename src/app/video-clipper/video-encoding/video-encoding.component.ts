@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class VideoEncodingComponent {
   codec = 'libx264';
-  availableCodecs = ['libx264', 'test'];
+  availableCodecs = ['libx264'];
 
   quality = 18;
   minQuality = 0;
