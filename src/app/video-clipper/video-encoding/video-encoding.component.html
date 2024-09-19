@@ -4,7 +4,7 @@
     <div>
       <label for="codecSelect">Codec</label>
       <select id="codecSelect" [(ngModel)]="codec">
-        @for (availableCodec of availableCodecs; track availableCodec) {
+        @for (availableCodec of availableCodecs; track $index) {
           <option>{{availableCodec}}</option>
         }
       </select>
