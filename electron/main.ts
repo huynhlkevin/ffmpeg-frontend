@@ -16,7 +16,7 @@ function createWindow() {
   if (app.isPackaged) {
     mainWindow.loadURL(
       url.format({
-        pathname: path.join(__dirname, 'ffmpeg-frontend/browser/index.html'),
+        pathname: path.join(__dirname, 'renderer/index.html'),
         protocol: 'file:',
         slashes: true
       })
