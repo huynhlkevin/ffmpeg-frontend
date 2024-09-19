@@ -18,11 +18,13 @@ const config: ForgeConfig = {
       "/public",
       "/src",
       "/angular.json",
+      "/eslint.config.js",
       "/forge.config.ts",
       "/package-lock.json",
       "/README.md",
       "/tsconfig.+"
-    ]
+    ],
+
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
