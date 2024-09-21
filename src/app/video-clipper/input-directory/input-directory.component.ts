@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DirectoryDialogService } from '../../services/directory-dialog/directory-dialog.service';
+import { InputDirectoryService } from '../../services/input-directory/input-directory.service';
 
 @Component({
   selector: 'app-input-directory',
@@ -9,15 +10,21 @@ import { DirectoryDialogService } from '../../services/directory-dialog/director
   styleUrl: './input-directory.component.scss'
 })
 export class InputDirectoryComponent {
-  inputDirectory = '';
 
-  constructor(private readonly directoryDialogService: DirectoryDialogService) {
+  inputDirectory: string;
+
+  constructor(
+    private readonly inputDirectoryService: InputDirectoryService,
+    private readonly directoryDialogService: DirectoryDialogService
+  ) {
+    this.inputDirectory = this.inputDirectoryService.path;
   }
 
-  async onChooseInputDirectory() {
+  async onSelectInputDirectoryClick() {
     const directory = await this.directoryDialogService.showOpenDialog();
     if (directory) {
       this.inputDirectory = directory;
+      this.inputDirectoryService.path = directory;
     }
   }
 }
