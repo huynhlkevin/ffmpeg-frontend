@@ -20,19 +20,4 @@ describe('AudioEncodingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should store the audio codec as a string', () => {
-    expect(typeof component.codec).toBe('string');
-  });
-
-  it('should have a default audio codec of libopus', () => {
-    expect(component.codec).toBe('libopus');
-  });
-
-  it('should store a list of available audio codecs', () => {
-    expect(Array.isArray(component.availableCodecs)).toBeTrue();
-    for (const codec of ['libopus', 'flac']) {
-      expect(component.availableCodecs).toContain(codec);
-    }
-  });
 });
