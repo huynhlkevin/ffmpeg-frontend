@@ -29,7 +29,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  ipcMain.handle('showDirectoryDialog', async () => {
+  ipcMain.handle('showOpenDirectoryDialog', async () => {
     const result = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
     return result.filePaths[0];
   });

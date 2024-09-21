@@ -2,6 +2,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('electron', {
-  showDirectoryDialog: () => ipcRenderer.invoke('showDirectoryDialog'),
+  showOpenDirectoryDialog: () => ipcRenderer.invoke('showOpenDirectoryDialog'),
   showOpenFileDialog: (args: any[]) => ipcRenderer.invoke('showOpenFileDialog', args)
 });
