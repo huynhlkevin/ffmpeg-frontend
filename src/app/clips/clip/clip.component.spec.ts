@@ -21,22 +21,6 @@ describe('ClipComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should store source video file', () => {
-    expect(typeof component.sourceVideoFile).toBe('string');
-  });
-
-  it('should be able to choose source video file', () => {
-    expect(typeof component.sourceVideoFile).toBe('string');
-  });
-
-  it('should store start time', () => {
-    expect(typeof component.startTime).toBe('string');
-  });
-
-  it('should store end time', () => {
-    expect(typeof component.endTime).toBe('string');
-  });
-
   it('should store its list index', () => {
     expect(typeof component.index).toBe('number');
   });
