@@ -16,7 +16,7 @@ export class VideoEncodingService {
   get quality(): number { return this._quality; }
   set quality(value: number) {
     if (value < 0 || value > 51) {
-      throw RangeError('Video encoding quality must be between 0 - 51');
+      throw RangeError('Video encoding quality must be between 0-51');
     }
 
     this._quality = value;
