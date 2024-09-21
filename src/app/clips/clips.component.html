@@ -1,0 +1,11 @@
+<section>
+  <fieldset>
+    <legend>Clips</legend>
+    <button type="button" (click)="createClip()">Create Clip</button>
+    <div>
+      @for (clip of clips; track clip) {
+        <app-clip [index]="$index" (delete)="deleteClip($index)"></app-clip>
+      }
+    </div>
+  </fieldset>
+</section>
