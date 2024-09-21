@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputDirectoryComponent } from './input-directory.component';
+import { InputDirectoryService } from '../../services/input-directory/input-directory.service';
 
 describe('InputDirectoryComponent', () => {
   let component: InputDirectoryComponent;
@@ -27,8 +28,11 @@ describe('InputDirectoryComponent', () => {
 
   it('should have a function to edit the input directory property', async () => {
     const directoryDialogServiceFake = { showOpenDialog: async () => 'test' };
-    component = new InputDirectoryComponent(directoryDialogServiceFake);
-    await component.onChooseInputDirectory()
+    component = new InputDirectoryComponent(
+      new InputDirectoryService(),
+      directoryDialogServiceFake
+    );
+    await component.onSelectInputDirectoryClick()
     expect(component.inputDirectory).toBe('test')
   });
 });

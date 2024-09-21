@@ -20,7 +20,7 @@ export class InputDirectoryComponent {
     this.inputDirectory = this.inputDirectoryService.path;
   }
 
-  async onSelectInputDirectoryClick() {
+  async onSelectInputDirectoryClick(): Promise<void> {
     const directory = await this.directoryDialogService.showOpenDialog();
     if (directory) {
       this.inputDirectory = directory;
