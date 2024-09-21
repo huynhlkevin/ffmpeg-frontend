@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { VideoEncodingService } from '../../services/video-encoding/video-encoding.service';
 
 @Component({
   selector: 'app-video-encoding',
@@ -9,10 +10,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './video-encoding.component.scss'
 })
 export class VideoEncodingComponent {
-  codec = 'libx264';
-  availableCodecs = ['libx264'];
 
-  quality = 18;
-  minQuality = 0;
-  maxQuality = 51;
+  codecs: string[];
+  minQuality: number;
+  maxQuality: number;
+  quality: number;
+
+  constructor(private readonly videoEncodingService: VideoEncodingService) {
+    this.codecs = this.videoEncodingService.codecs;
+    this.minQuality = this.videoEncodingService.minQuality;
+    this.maxQuality = this.videoEncodingService.maxQuality;
+    this.quality = this.videoEncodingService.quality;
+  }
+
+  onSelectedCodecChange(value: string): void {
+    this.videoEncodingService.codec = value;
+  }
+
+  onQualityChange(value: string): void {
+    this.quality = Number(value);
+    this.videoEncodingService.quality = Number(value);
+  }
 }

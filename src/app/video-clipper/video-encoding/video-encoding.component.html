@@ -2,16 +2,16 @@
   <fieldset>
     <legend>Video Encoding</legend>
     <div>
-      <label for="codecSelect">Codec</label>
-      <select id="codecSelect" [(ngModel)]="codec">
-        @for (availableCodec of availableCodecs; track $index) {
-          <option>{{availableCodec}}</option>
+      <label for="videoCodecSelect">Codec</label>
+      <select id="videoCodecSelect" #codecSelect (change)="onSelectedCodecChange(codecSelect.value)">
+        @for (codec of codecs; track $index) {
+          <option>{{codec}}</option>
         }
       </select>
     </div>
     <div>
-      <label for="qualityRange">Quality {{quality}}</label>
-      <input id="qualityRange" type="range" [min]="minQuality" [max]="maxQuality" [(ngModel)]="quality"/>
+      <label for="videoQualityRange">Quality {{quality}}</label>
+      <input id="videoQualityRange" #qualityRange type="range" [min]="minQuality" [max]="maxQuality" [value]="quality" (input)="onQualityChange(qualityRange.value)"/>
     </div>
   </fieldset>
 </section>
