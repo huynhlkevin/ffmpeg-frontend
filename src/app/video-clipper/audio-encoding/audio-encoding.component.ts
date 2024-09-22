@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AudioEncodingService } from '../../services/audio-encoding/audio-encoding.service';
 
 @Component({
   selector: 'app-audio-encoding',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './audio-encoding.component.html',
   styleUrl: './audio-encoding.component.scss'
 })
