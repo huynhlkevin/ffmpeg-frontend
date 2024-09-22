@@ -1,6 +1,7 @@
 import { Component, Input, output } from '@angular/core';
 import { FileDialogService } from '../../services/file-dialog/file-dialog.service';
 import { Clip, ClipsService } from '../../services/clips/clips.service';
+import { TimeFormatterService } from '../../services/time-formatter/time-formatter.service';
 
 @Component({
   selector: 'app-clip',
@@ -19,7 +20,8 @@ export class ClipComponent {
 
   constructor(
     private readonly clipsService: ClipsService,
-    private readonly fileDialogService: FileDialogService
+    private readonly fileDialogService: FileDialogService,
+    private readonly timeFormatterService: TimeFormatterService
   ) {
     this.sourceVideoFile = this.getClip().sourceVideoFile;
   }
@@ -39,10 +41,18 @@ export class ClipComponent {
   }
 
   onStartTimeTextChange(value: string): void {
+    if (!this.timeFormatterService.validate(value)) {
+      return;
+    }
+
     this.getClip().startTime = value;
   }
 
   onEndTimeTextChange(value: string): void {
+    if (!this.timeFormatterService.validate(value)) {
+      return;
+    }
+
     this.getClip().endTime = value;
   }
 
