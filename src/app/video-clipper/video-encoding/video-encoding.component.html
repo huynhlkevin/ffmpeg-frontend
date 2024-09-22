@@ -10,6 +10,18 @@
       </select>
     </div>
     <div>
+      <label for="videoPresetSelect">Codec</label>
+      <select id="videoPresetSelect" #presetSelect (change)="onSelectedPresetChange(presetSelect.value)">
+        @for (preset of presets; track $index) {
+          @if (preset === defaultPreset) {
+            <option selected>{{preset}}</option>
+          } @else {
+            <option>{{preset}}</option>
+          }
+        }
+      </select>
+    </div>
+    <div>
       <label for="videoQualityRange">Quality {{quality}}</label>
       <input id="videoQualityRange" #qualityRange type="range" [min]="minQuality" [max]="maxQuality" [value]="quality" (input)="onQualityChange(qualityRange.value)"/>
     </div>

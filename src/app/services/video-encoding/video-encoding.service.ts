@@ -9,10 +9,26 @@ export class VideoEncodingService {
   get codec(): string { return this._codec; }
   set codec(value: string) { this._codec = value; }
 
-  private _codecs = ['libx264', 'test'];
+  private _codecs = ['libx264'];
   get codecs(): string[] { return this._codecs; }
 
-  private _quality = 18;
+  private _preset = 'medium';
+  get preset(): string { return this._preset; }
+  set preset(value: string) { this._preset = value; }
+
+  private _presets = [
+    'ultrafast',
+    'superfast',
+    'veryfast',
+    'fast',
+    'medium',
+    'slow',
+    'slower',
+    'veryslow'
+  ];
+  get presets(): string[] { return this._presets; }
+
+  private _quality = 23;
   get quality(): number { return this._quality; }
   set quality(value: number) {
     if (value < 0 || value > 51) {

@@ -12,12 +12,16 @@ import { VideoEncodingService } from '../../services/video-encoding/video-encodi
 export class VideoEncodingComponent {
 
   codecs: string[];
+  presets: string[];
+  defaultPreset: string;
   minQuality: number;
   maxQuality: number;
   quality: number;
 
   constructor(private readonly videoEncodingService: VideoEncodingService) {
     this.codecs = this.videoEncodingService.codecs;
+    this.presets = this.videoEncodingService.presets;
+    this.defaultPreset = this.videoEncodingService.preset;
     this.minQuality = this.videoEncodingService.minQuality;
     this.maxQuality = this.videoEncodingService.maxQuality;
     this.quality = this.videoEncodingService.quality;
@@ -25,6 +29,10 @@ export class VideoEncodingComponent {
 
   onSelectedCodecChange(value: string): void {
     this.videoEncodingService.codec = value;
+  }
+
+  onSelectedPresetChange(value: string): void {
+    this.videoEncodingService.preset = value;
   }
 
   onQualityChange(value: string): void {

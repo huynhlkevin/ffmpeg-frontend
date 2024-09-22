@@ -29,12 +29,37 @@ describe('VideoEncodingService', () => {
     }
   });
 
+  it('should store preset', () => {
+    expect(typeof service.preset).toBe('string');
+  });
+
+  it('should default preset to medium', () => {
+    expect(service.preset).toBe('medium');
+  });
+
+  it('should store a list of presets', () => {
+    expect(Array.isArray(service.presets)).toBeTrue();
+    const presets = [
+      'ultrafast',
+      'superfast',
+      'veryfast',
+      'fast',
+      'medium',
+      'slow',
+      'slower',
+      'veryslow'
+    ];
+    for (const preset of presets) {
+      expect(service.presets).toContain(preset);
+    }
+  });
+
   it('should store quality', () => {
     expect(typeof service.quality).toBe('number');
   });
 
-  it('should default quality to 18', () => {
-    expect(service.quality).toBe(18);
+  it('should default quality to 23', () => {
+    expect(service.quality).toBe(23);
   });
 
   it('should have a minimum quality of 0', () => {
