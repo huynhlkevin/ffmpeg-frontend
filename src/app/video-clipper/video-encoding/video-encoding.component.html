@@ -10,7 +10,7 @@
       </select>
     </div>
     <div>
-      <label for="videoPresetSelect">Codec</label>
+      <label for="videoPresetSelect">Preset</label>
       <select id="videoPresetSelect" #presetSelect (change)="onSelectedPresetChange(presetSelect.value)">
         @for (preset of presets; track $index) {
           @if (preset === defaultPreset) {

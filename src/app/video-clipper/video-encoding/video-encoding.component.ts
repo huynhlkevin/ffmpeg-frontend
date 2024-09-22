@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { VideoEncodingService } from '../../services/video-encoding/video-encoding.service';
 
 @Component({
   selector: 'app-video-encoding',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './video-encoding.component.html',
   styleUrl: './video-encoding.component.scss'
 })
