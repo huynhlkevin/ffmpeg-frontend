@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
-import { FilesystemService } from '../services/filesystem/filesystem.service';
+import { FilesystemService } from '../../services/filesystem/filesystem.service';
 
 @Component({
   selector: 'app-clips',
