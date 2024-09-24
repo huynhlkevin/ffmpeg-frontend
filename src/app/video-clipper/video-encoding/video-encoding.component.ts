@@ -1,41 +1,57 @@
-import { Component } from '@angular/core';
-import { VideoEncodingService } from '../../services/video-encoding/video-encoding.service';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ControlContainer, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-video-encoding',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './video-encoding.component.html',
-  styleUrl: './video-encoding.component.scss'
+  styleUrl: './video-encoding.component.scss',
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class VideoEncodingComponent {
+export class VideoEncodingComponent implements OnInit, AfterViewInit  {
 
-  codecs: string[];
-  presets: string[];
-  defaultPreset: string;
-  minQuality: number;
-  maxQuality: number;
-  quality: number;
+  codecs = ['libx264'];
 
-  constructor(private readonly videoEncodingService: VideoEncodingService) {
-    this.codecs = this.videoEncodingService.codecs;
-    this.presets = this.videoEncodingService.presets;
-    this.defaultPreset = this.videoEncodingService.preset;
-    this.minQuality = this.videoEncodingService.minQuality;
-    this.maxQuality = this.videoEncodingService.maxQuality;
-    this.quality = this.videoEncodingService.quality;
+  presets = [
+    'ultrafast',
+    'superfast',
+    'veryfast',
+    'fast',
+    'medium',
+    'slow',
+    'slower',
+    'veryslow'
+  ]
+
+  minQuality = 0;
+  maxQuality = 51;
+
+  constructor(
+    private readonly formGroupDirective: FormGroupDirective,
+    private readonly formBuilder: FormBuilder
+  ) {
+
   }
 
-  onSelectedCodecChange(value: string): void {
-    this.videoEncodingService.codec = value;
+  ngOnInit(): void {
+    const videoEncoding = this.formBuilder.group({
+      codec: [''],
+      preset: [''],
+      quality: [23]
+    });
+    this.formGroupDirective.form.addControl('videoEncoding', videoEncoding);
   }
 
-  onSelectedPresetChange(value: string): void {
-    this.videoEncodingService.preset = value;
+  ngAfterViewInit(): void {
+    const codec = this.formGroupDirective.form.get('videoEncoding.codec');
+    codec!.setValue('libx264');
+
+    const preset = this.formGroupDirective.form.get('videoEncoding.preset');
+    preset!.setValue('medium');
   }
 
-  onQualityChange(value: string): void {
-    this.quality = Number(value);
-    this.videoEncodingService.quality = Number(value);
+  get quality(): FormControl {
+    return this.formGroupDirective.form.get('videoEncoding.quality') as FormControl;
   }
 }

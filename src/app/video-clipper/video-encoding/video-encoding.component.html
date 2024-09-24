@@ -1,9 +1,9 @@
-<section>
+<section formGroupName="videoEncoding">
   <fieldset>
     <legend>Video Encoding</legend>
     <div>
       <label for="videoCodecSelect">Codec</label>
-      <select id="videoCodecSelect" #codecSelect (change)="onSelectedCodecChange(codecSelect.value)">
+      <select id="videoCodecSelect" formControlName="codec">
         @for (codec of codecs; track $index) {
           <option>{{codec}}</option>
         }
@@ -11,19 +11,15 @@
     </div>
     <div>
       <label for="videoPresetSelect">Preset</label>
-      <select id="videoPresetSelect" #presetSelect (change)="onSelectedPresetChange(presetSelect.value)">
+      <select id="videoPresetSelect" formControlName="preset">
         @for (preset of presets; track $index) {
-          @if (preset === defaultPreset) {
-            <option selected>{{preset}}</option>
-          } @else {
-            <option>{{preset}}</option>
-          }
+          <option>{{preset}}</option>
         }
       </select>
     </div>
     <div>
-      <label for="videoQualityRange">Quality {{quality}}</label>
-      <input id="videoQualityRange" #qualityRange type="range" [min]="minQuality" [max]="maxQuality" [value]="quality" (input)="onQualityChange(qualityRange.value)"/>
+      <label for="videoQualityRange">Quality {{ quality.value }}</label>
+      <input id="videoQualityRange" type="range" [min]="minQuality" [max]="maxQuality" formControlName="quality"/>
     </div>
   </fieldset>
 </section>
