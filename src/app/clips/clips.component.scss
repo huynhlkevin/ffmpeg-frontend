@@ -1,11 +1,34 @@
 fieldset {
   display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.clips {
+  display: flex;
   flex-flow: column;
   gap: 0.5em;
 }
 
-div {
+.clip {
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  flex-flow: column;
 }
+
+.clip div {
+  display: flex;
+  align-items: center;
+}
+
+.clip div > button {
+  margin-right: 0.5em;
+}
+
+.clip div > input {
+  flex: 1;
+}
+
+.clip div > label {
+  width: 5em;
+}
+

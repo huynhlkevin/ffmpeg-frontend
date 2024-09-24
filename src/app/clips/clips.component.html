@@ -1,10 +1,27 @@
-<section>
+<section formArrayName="clips">
   <fieldset>
     <legend>Clips</legend>
-    <button type="button" (click)="createClip()">Create Clip</button>
-    <div>
-      @for (clip of clips; track clip) {
-        <app-clip [index]="$index" (delete)="deleteClip($index)"></app-clip>
+    <button type="button" (click)="onCreateClipClick()">Create Clip</button>
+    <div class="clips">
+      @for (clip of clips.controls; track $index) {
+        <section class="clip" [formGroupName]="$index">
+          <fieldset>
+            <legend>Clip {{ $index + 1 }}</legend>
+            <div>
+              <button type="button" (click)="onSelectSourceVideoFileClick($index)">Select Source Video File</button>
+              <input type="text" formControlName="sourceVideoFile"/>
+            </div>
+            <div>
+              <label for="startTimeText">Start Time</label>
+              <input id="startTimeText" type="text" formControlName="startTime"/>
+            </div>
+            <div>
+              <label for="endTimeText">End Time</label>
+              <input id="endTimeText" type="text" formControlName="endTime"/>
+            </div>
+            <button type="button" (click)="onDeleteClipClick($index)">Delete</button>
+          </fieldset>
+        </section>
       }
     </div>
   </fieldset>
