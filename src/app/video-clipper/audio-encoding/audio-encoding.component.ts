@@ -1,22 +1,34 @@
-import { Component } from '@angular/core';
-import { AudioEncodingService } from '../../services/audio-encoding/audio-encoding.service';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ControlContainer, FormBuilder, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-audio-encoding',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './audio-encoding.component.html',
-  styleUrl: './audio-encoding.component.scss'
+  styleUrl: './audio-encoding.component.scss',
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class AudioEncodingComponent {
+export class AudioEncodingComponent implements OnInit, AfterViewInit {
 
-  readonly codecs: string[];
+  readonly codecs = ['libopus', 'flac'];
 
-  constructor(private readonly audioEncodingService: AudioEncodingService) {
-    this.codecs = this.audioEncodingService.codecs;
+  constructor(
+    private readonly formGroupDirective: FormGroupDirective,
+    private readonly formBuilder: FormBuilder
+  ) {
+
   }
 
-  onSelectedCodecChange(value: string): void {
-    this.audioEncodingService.codec = value;
+  ngOnInit(): void {
+    const audioEncoding = this.formBuilder.group({
+      codec: ['']
+    });
+    this.formGroupDirective.form.addControl('audioEncoding', audioEncoding);
+  }
+
+  ngAfterViewInit(): void {
+    const codec = this.formGroupDirective.form.get('audioEncoding.codec');
+    codec!.setValue('libopus');
   }
 }
