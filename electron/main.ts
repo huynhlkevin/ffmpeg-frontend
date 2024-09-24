@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import fs from 'fs/promises';
 import url from 'url';
 import path from 'path';
 
@@ -34,10 +35,23 @@ app.whenReady().then(() => {
     return result.filePaths[0];
   });
 
-  ipcMain.handle('showOpenFileDialog', async (event: Electron.IpcMainInvokeEvent, args: any[]) => {
-    const filters = args[0];
+  ipcMain.handle('showOpenFileDialog', async (event: Electron.IpcMainInvokeEvent, filters: any[]) => {
     const result = await dialog.showOpenDialog(mainWindow, { properties: ['openFile'], filters });
     return result.filePaths[0];
+  });
+
+  ipcMain.handle('pathExists', async (event: Electron.IpcMainInvokeEvent, path: string) => {
+    try {
+      await fs.access(path);
+      return true;
+    } catch (error: any) {
+      return false;
+    }
+  });
+
+  ipcMain.handle('isDirectory', async (event: Electron.IpcMainInvokeEvent, path: string) => {
+    const stat = await fs.stat(path);
+    return stat.isDirectory();
   });
 
   createWindow();

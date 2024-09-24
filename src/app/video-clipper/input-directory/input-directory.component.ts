@@ -1,30 +1,52 @@
-import { Component } from '@angular/core';
-import { DirectoryDialogService } from '../../services/directory-dialog/directory-dialog.service';
-import { InputDirectoryService } from '../../services/input-directory/input-directory.service';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, AsyncValidatorFn, ControlContainer, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { FilesystemService } from '../../services/filesystem/filesystem.service';
 
 @Component({
   selector: 'app-input-directory',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './input-directory.component.html',
-  styleUrl: './input-directory.component.scss'
+  styleUrl: './input-directory.component.scss',
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class InputDirectoryComponent {
-
-  inputDirectory: string;
+export class InputDirectoryComponent implements OnInit {
 
   constructor(
-    private readonly inputDirectoryService: InputDirectoryService,
-    private readonly directoryDialogService: DirectoryDialogService
+    private readonly formGroupDirective: FormGroupDirective,
+    private readonly formBuilder: FormBuilder,
+    private readonly filesystemService: FilesystemService
   ) {
-    this.inputDirectory = this.inputDirectoryService.path;
+
+  }
+
+  ngOnInit(): void {
+    const inputDirectory = this.formBuilder.group({
+      path: this.formBuilder.control('', { asyncValidators: [this.pathValidator()], updateOn: 'blur' })
+    });
+    this.formGroupDirective.form.addControl('inputDirectory', inputDirectory);
   }
 
   async onSelectInputDirectoryClick(): Promise<void> {
-    const directory = await this.directoryDialogService.showOpenDialog();
+    const directory = await this.filesystemService.showOpenDirectoryDialog();
     if (directory) {
-      this.inputDirectory = directory;
-      this.inputDirectoryService.path = directory;
+      this.path.setValue(directory);
+    }
+  }
+
+  get path(): FormControl {
+    return this.formGroupDirective.form.get('inputDirectory.path') as FormControl;
+  }
+
+  private pathValidator(): AsyncValidatorFn {
+    return async (control: AbstractControl): Promise<ValidationErrors | null> => {
+      const pathExists = await this.filesystemService.exists(control.value);
+      if (!pathExists) {
+        return { pathDoesNotExist: control.value };
+      }
+
+      const isDirectory = await this.filesystemService.isDirectory(control.value);
+      return isDirectory ? null : { isNotDirectory: control.value };
     }
   }
 }

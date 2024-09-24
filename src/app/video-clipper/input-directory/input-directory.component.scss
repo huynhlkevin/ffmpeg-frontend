@@ -3,3 +3,7 @@ fieldset {
   align-items: center;
   gap: 0.5em;
 }
+
+input {
+  flex-grow: 1;
+}

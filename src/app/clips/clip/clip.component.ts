@@ -1,7 +1,7 @@
 import { Component, Input, output } from '@angular/core';
-import { FileDialogService } from '../../services/file-dialog/file-dialog.service';
 import { Clip, ClipsService } from '../../services/clips/clips.service';
 import { TimeFormatterService } from '../../services/time-formatter/time-formatter.service';
+import { FilesystemService } from '../../services/filesystem/filesystem.service';
 
 @Component({
   selector: 'app-clip',
@@ -20,7 +20,7 @@ export class ClipComponent {
 
   constructor(
     private readonly clipsService: ClipsService,
-    private readonly fileDialogService: FileDialogService,
+    private readonly filesystemService: FilesystemService,
     private readonly timeFormatterService: TimeFormatterService
   ) {
     this.sourceVideoFile = this.getClip().sourceVideoFile;
@@ -28,7 +28,7 @@ export class ClipComponent {
 
   async onSelectSourceVideoFileClick(): Promise<void> {
     const extensions = ['mp4', 'mkv']
-    const file = await this.fileDialogService.showOpenDialog([
+    const file = await this.filesystemService.showOpenFileDialog([
       {
         extensions,
         name: `Video Files (${extensions.map(extension => `*.${extension}`)})`

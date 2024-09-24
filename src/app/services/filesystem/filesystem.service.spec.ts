@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FileDialogService } from './file-dialog.service';
+import { FilesystemService } from './filesystem.service';
 
-describe('FileDialogService', () => {
-  let service: FileDialogService;
+describe('FilesystemService', () => {
+  let service: FilesystemService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FileDialogService);
+    service = TestBed.inject(FilesystemService);
   });
 
   it('should be created', () => {

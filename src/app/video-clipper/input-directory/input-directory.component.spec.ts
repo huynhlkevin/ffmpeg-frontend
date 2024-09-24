@@ -1,15 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputDirectoryComponent } from './input-directory.component';
-import { InputDirectoryService } from '../../services/input-directory/input-directory.service';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 describe('InputDirectoryComponent', () => {
   let component: InputDirectoryComponent;
   let fixture: ComponentFixture<InputDirectoryComponent>;
+  let formGroupDirective: FormGroupDirective;
 
   beforeEach(async () => {
+    formGroupDirective = new FormGroupDirective([], []);
+    formGroupDirective.form = new FormGroup({});
     await TestBed.configureTestingModule({
-      imports: [InputDirectoryComponent]
+      imports: [InputDirectoryComponent],
+      providers: [{ provide: FormGroupDirective, useValue: formGroupDirective }]
     })
     .compileComponents();
 
@@ -20,19 +24,5 @@ describe('InputDirectoryComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should store the input directory as a string', () => {
-    expect(typeof component.inputDirectory).toBe('string');
-  });
-
-  it('should have a function to edit the input directory property', async () => {
-    const directoryDialogServiceFake = { showOpenDialog: async () => 'test' };
-    component = new InputDirectoryComponent(
-      new InputDirectoryService(),
-      directoryDialogServiceFake
-    );
-    await component.onSelectInputDirectoryClick()
-    expect(component.inputDirectory).toBe('test')
   });
 });
