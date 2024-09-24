@@ -21,8 +21,8 @@ export class FilesystemService {
   }
 
   async isDirectory(path: string): Promise<boolean> {
-      // @ts-expect-error Electron global variables
-      return await window.electron.isDirectory(path);
+    // @ts-expect-error Electron global variables
+    return await window.electron.isDirectory(path);
   }
 }
 
