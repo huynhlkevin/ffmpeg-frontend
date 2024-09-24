@@ -1,6 +1,7 @@
-<section>
+<form (ngSubmit)="onSubmit()" [formGroup]="videoClipperForm">
   <app-input-directory></app-input-directory>
   <app-video-encoding></app-video-encoding>
   <app-audio-encoding></app-audio-encoding>
   <app-clips></app-clips>
-</section>
+  <button type="submit" [disabled]="videoClipperForm.invalid">Submit</button>
+</form>
