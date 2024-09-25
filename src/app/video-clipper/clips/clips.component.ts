@@ -52,12 +52,14 @@ export class ClipsComponent implements OnInit {
 
   async onSelectSourceVideoFileClick(index: number): Promise<void> {
     const extensions = ['mp4', 'mkv']
-    const file = await this.filesystemService.showOpenFileDialog([
+    const filters = [
       {
         extensions,
         name: `Video Files (${extensions.map(extension => `*.${extension}`)})`
       }
-    ]);
+    ];
+    const inputDirectory = this.formGroupDirective.form.get('inputDirectory.path')!.value;
+    const file = await this.filesystemService.showOpenFileDialog(filters, inputDirectory);
     if (file) {
       const sourceVideoFile = this.clips.get(`${index}.sourceVideoFile`) as FormControl;
       sourceVideoFile.setValue(file);
