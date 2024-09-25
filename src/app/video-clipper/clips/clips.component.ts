@@ -35,8 +35,8 @@ export class ClipsComponent implements OnInit {
     const clip = this.formBuilder.group({
       id: [v4()],
       sourceVideoFile: this.formBuilder.control(this.lastSelectedSourceVideoFile, { validators: [Validators.required], asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
-      startTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' }),
-      endTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' })
+      startTime: this.formBuilder.control('0.0', { validators: [this.timeFormatValidator()], updateOn: 'blur' }),
+      endTime: this.formBuilder.control('1:00.0', { validators: [this.timeFormatValidator()], updateOn: 'blur' })
     });
     this.clips.push(clip);
   }
