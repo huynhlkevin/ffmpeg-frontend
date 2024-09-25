@@ -35,6 +35,9 @@
                 <div>Invalid time format.</div>
               }
             </div>
+            @if (clip.hasError('endTimeMustBeGreaterThanStartTime')) {
+              <div>End time must be greater than start time.</div>
+            }
             <button type="button" (click)="onDeleteClipClick($index)">Delete</button>
           </fieldset>
         </section>
