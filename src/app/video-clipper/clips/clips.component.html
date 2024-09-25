@@ -19,10 +19,16 @@
             <div>
               <label for="startTimeText">Start Time</label>
               <input id="startTimeText" type="text" formControlName="startTime"/>
+              @if (clip.get('startTime')!.hasError('invalidTimeFormat')) {
+                <div>Invalid time format.</div>
+              }
             </div>
             <div>
               <label for="endTimeText">End Time</label>
               <input id="endTimeText" type="text" formControlName="endTime"/>
+              @if (clip.get('endTime')!.hasError('invalidTimeFormat')) {
+                <div>Invalid time format.</div>
+              }
             </div>
             <button type="button" (click)="onDeleteClipClick($index)">Delete</button>
           </fieldset>

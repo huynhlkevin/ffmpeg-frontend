@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FilesystemService } from '../../services/filesystem/filesystem.service';
 import { v4 } from 'uuid';
+import { TimeFormatterService } from '../../services/time-formatter/time-formatter.service';
 
 @Component({
   selector: 'app-clips',
@@ -16,7 +17,8 @@ export class ClipsComponent implements OnInit {
   constructor(
     private readonly formGroupDirective: FormGroupDirective,
     private readonly formBuilder: FormBuilder,
-    private readonly filesystemService: FilesystemService
+    private readonly filesystemService: FilesystemService,
+    private readonly timeFormatterService: TimeFormatterService
   ) {
 
   }
@@ -30,8 +32,8 @@ export class ClipsComponent implements OnInit {
     const clip = this.formBuilder.group({
       id: [v4()],
       sourceVideoFile: this.formBuilder.control('', { asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
-      startTime: [''],
-      endTime: ['']
+      startTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' }),
+      endTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' })
     });
     this.clips.push(clip);
   }
@@ -67,6 +69,13 @@ export class ClipsComponent implements OnInit {
 
       const isFile = await this.filesystemService.isFile(control.value);
       return isFile ? null : { isNotFile: control.value };
+    }
+  }
+
+  private timeFormatValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valid = this.timeFormatterService.validate(control.value);
+      return valid ? null : { invalidTimeFormat: control.value }
     }
   }
 }
