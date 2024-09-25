@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { FilesystemService } from '../../services/filesystem/filesystem.service';
 import { v4 } from 'uuid';
 import { TimeFormatterService } from '../../services/time-formatter/time-formatter.service';
@@ -34,10 +34,11 @@ export class ClipsComponent implements OnInit {
   onCreateClipClick(): void {
     const clip = this.formBuilder.group({
       id: [v4()],
-      sourceVideoFile: this.formBuilder.control(this.lastSelectedSourceVideoFile, { validators: [Validators.required], asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
-      startTime: this.formBuilder.control('0.0', { validators: [this.timeFormatValidator()], updateOn: 'blur' }),
-      endTime: this.formBuilder.control('1:00.0', { validators: [this.timeFormatValidator()], updateOn: 'blur' })
-    });
+      sourceVideoFile: [this.lastSelectedSourceVideoFile, [Validators.required], [this.sourceVideoFileValidator()]],
+      startTime: ['0.0', [this.timeFormatValidator()]],
+      endTime: ['1:00.0', [this.timeFormatValidator()]]
+    }, { validator: [this.timeDifferenceValidator()] } as AbstractControlOptions);
+
     this.clips.push(clip);
   }
 
@@ -66,8 +67,8 @@ export class ClipsComponent implements OnInit {
 
   private sourceVideoFileValidator(): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
-      const pathExists = await this.filesystemService.exists(control.value);
-      if (!pathExists) {
+      const pathDoesNotExist = !(await this.filesystemService.exists(control.value));
+      if (pathDoesNotExist) {
         return { pathDoesNotExist: control.value };
       }
 
@@ -79,7 +80,21 @@ export class ClipsComponent implements OnInit {
   private timeFormatValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valid = this.timeFormatterService.validate(control.value);
-      return valid ? null : { invalidTimeFormat: control.value }
+      return valid ? null : { invalidTimeFormat: control.value };
+    }
+  }
+
+  private timeDifferenceValidator(): ValidatorFn {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const startTime = group.get('startTime') as FormControl;
+      const endTime = group.get('endTime') as FormControl;
+      if (startTime.invalid || endTime.invalid) {
+        return null;
+      }
+
+      const startTimeSeconds = this.timeFormatterService.convertToSeconds(startTime.value);
+      const endTimeSeconds = this.timeFormatterService.convertToSeconds(endTime.value);
+      return endTimeSeconds > startTimeSeconds ? null : { endTimeMustBeGreaterThanStartTime: [startTimeSeconds, endTimeSeconds] }
     }
   }
 }
