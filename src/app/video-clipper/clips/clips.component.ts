@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { FilesystemService } from '../../services/filesystem/filesystem.service';
 import { v4 } from 'uuid';
 import { TimeFormatterService } from '../../services/time-formatter/time-formatter.service';
@@ -33,7 +33,7 @@ export class ClipsComponent implements OnInit {
   onCreateClipClick(): void {
     const clip = this.formBuilder.group({
       id: [v4()],
-      sourceVideoFile: this.formBuilder.control(this.lastSelectedSourceVideoFile, { asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
+      sourceVideoFile: this.formBuilder.control(this.lastSelectedSourceVideoFile, { validators: [Validators.required], asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
       startTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' }),
       endTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' })
     });

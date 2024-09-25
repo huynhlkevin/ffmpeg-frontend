@@ -14,6 +14,8 @@
                 <div>Path does not exist.</div>
               } @else if (clip.get('sourceVideoFile')!.hasError('isNotFile')) {
                 <div>Not a file.</div>
+              } @else if (clip.get('sourceVideoFile')!.hasError('required')) {
+                <div>Required.</div>
               }
             </div>
             <div>
