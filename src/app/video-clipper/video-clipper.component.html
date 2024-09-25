@@ -3,5 +3,5 @@
   <app-video-encoding></app-video-encoding>
   <app-audio-encoding></app-audio-encoding>
   <app-clips></app-clips>
-  <button type="submit">Submit</button>
+  <button type="submit" [disabled]="videoClipperForm.invalid">Submit</button>
 </form>
