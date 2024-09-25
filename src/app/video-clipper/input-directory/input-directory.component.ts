@@ -22,7 +22,7 @@ export class InputDirectoryComponent implements OnInit {
 
   ngOnInit(): void {
     const inputDirectory = this.formBuilder.group({
-      path: this.formBuilder.control('', { asyncValidators: [this.pathValidator()], updateOn: 'blur' })
+      path: ['', [], [this.pathValidator()]]
     });
     this.formGroupDirective.form.addControl('inputDirectory', inputDirectory);
   }
