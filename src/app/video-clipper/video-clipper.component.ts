@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { InputDirectoryComponent } from "./input-directory/input-directory.component";
 import { VideoEncodingComponent } from './video-encoding/video-encoding.component';
 import { AudioEncodingComponent } from './audio-encoding/audio-encoding.component';
-import { ClipsComponent } from '../clips/clips.component';
+import { ClipsComponent } from './clips/clips.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -27,6 +27,6 @@ export class VideoClipperComponent {
   }
 
   onSubmit(): void {
-    console.log(this.videoClipperForm.valid);
+    console.log(this.videoClipperForm);
   }
 }
