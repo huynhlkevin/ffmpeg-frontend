@@ -44,11 +44,11 @@ export class VideoEncodingComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit(): void {
-    const codec = this.formGroupDirective.form.get('videoEncoding.codec');
-    codec!.setValue('libx264');
+    const codec = this.formGroupDirective.form.get('videoEncoding.codec') as FormControl;
+    codec.setValue('libx264');
 
-    const preset = this.formGroupDirective.form.get('videoEncoding.preset');
-    preset!.setValue('medium');
+    const preset = this.formGroupDirective.form.get('videoEncoding.preset') as FormControl;
+    preset.setValue('medium');
   }
 
   get quality(): FormControl {

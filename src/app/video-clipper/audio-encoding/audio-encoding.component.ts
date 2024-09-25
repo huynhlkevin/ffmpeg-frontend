@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { ControlContainer, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-audio-encoding',
@@ -28,7 +28,7 @@ export class AudioEncodingComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const codec = this.formGroupDirective.form.get('audioEncoding.codec');
-    codec!.setValue('libopus');
+    const codec = this.formGroupDirective.form.get('audioEncoding.codec') as FormControl;
+    codec.setValue('libopus');
   }
 }

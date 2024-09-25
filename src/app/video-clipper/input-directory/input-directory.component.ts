@@ -44,8 +44,8 @@ export class InputDirectoryComponent implements OnInit {
         return null;
       }
 
-      const pathExists = await this.filesystemService.exists(control.value);
-      if (!pathExists) {
+      const pathDoesNotExist = !(await this.filesystemService.exists(control.value));
+      if (pathDoesNotExist) {
         return { pathDoesNotExist: control.value };
       }
 
