@@ -14,6 +14,8 @@ import { TimeFormatterService } from '../../services/time-formatter/time-formatt
 })
 export class ClipsComponent implements OnInit {
 
+  private lastSelectedSourceVideoFile = '';
+
   constructor(
     private readonly formGroupDirective: FormGroupDirective,
     private readonly formBuilder: FormBuilder,
@@ -31,7 +33,7 @@ export class ClipsComponent implements OnInit {
   onCreateClipClick(): void {
     const clip = this.formBuilder.group({
       id: [v4()],
-      sourceVideoFile: this.formBuilder.control('', { asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
+      sourceVideoFile: this.formBuilder.control(this.lastSelectedSourceVideoFile, { asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
       startTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' }),
       endTime: this.formBuilder.control('', { validators: [this.timeFormatValidator()], updateOn: 'blur' })
     });
@@ -57,6 +59,7 @@ export class ClipsComponent implements OnInit {
     if (file) {
       const sourceVideoFile = this.clips.get(`${index}.sourceVideoFile`) as FormControl;
       sourceVideoFile.setValue(file);
+      this.lastSelectedSourceVideoFile = file;
     }
   }
 
