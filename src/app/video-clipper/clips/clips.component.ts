@@ -28,6 +28,7 @@ export class ClipsComponent implements OnInit {
   ngOnInit(): void {
     const clips = this.formBuilder.array([], { validators: [Validators.required] });
     this.formGroupDirective.form.addControl('clips', clips);
+    this.onCreateClipClick();
   }
 
   onCreateClipClick(): void {
