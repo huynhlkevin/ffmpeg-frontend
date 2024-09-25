@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { FilesystemService } from '../../services/filesystem/filesystem.service';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-clips',
@@ -27,16 +28,15 @@ export class ClipsComponent implements OnInit {
 
   onCreateClipClick(): void {
     const clip = this.formBuilder.group({
+      id: [v4()],
       sourceVideoFile: [''],
       startTime: [''],
       endTime: ['']
     });
     this.clips.push(clip);
-    console.log(this.formGroupDirective.form.get('clips'));
   }
 
   onDeleteClipClick(index: number): void {
-    console.log(this.clips);
     this.clips.removeAt(index);
   }
 

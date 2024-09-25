@@ -3,7 +3,7 @@
     <legend>Clips</legend>
     <button type="button" (click)="onCreateClipClick()">Create Clip</button>
     <div class="clips">
-      @for (clip of clips.controls; track $index) {
+      @for (clip of clips.controls; track clip.get('id')) {
         <section class="clip" [formGroupName]="$index">
           <fieldset>
             <legend>Clip {{ $index + 1 }}</legend>
