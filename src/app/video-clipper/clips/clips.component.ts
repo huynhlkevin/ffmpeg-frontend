@@ -29,7 +29,7 @@ export class ClipsComponent implements OnInit {
   onCreateClipClick(): void {
     const clip = this.formBuilder.group({
       id: [v4()],
-      sourceVideoFile: this.formBuilder.control('', { asyncValidators: [this.filePathValidator()], updateOn: 'blur' }),
+      sourceVideoFile: this.formBuilder.control('', { asyncValidators: [this.sourceVideoFileValidator()], updateOn: 'blur' }),
       startTime: [''],
       endTime: ['']
     });
@@ -58,7 +58,7 @@ export class ClipsComponent implements OnInit {
     }
   }
 
-  private filePathValidator(): AsyncValidatorFn {
+  private sourceVideoFileValidator(): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
       const pathExists = await this.filesystemService.exists(control.value);
       if (!pathExists) {
