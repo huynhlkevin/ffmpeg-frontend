@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import fs from 'fs/promises';
 import url from 'url';
@@ -44,7 +43,7 @@ app.whenReady().then(() => {
     try {
       await fs.access(path);
       return true;
-    } catch (error: any) {
+    } catch {
       return false;
     }
   });
