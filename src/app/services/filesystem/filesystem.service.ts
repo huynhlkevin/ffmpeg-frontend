@@ -10,9 +10,9 @@ export class FilesystemService {
     return await window.electron.showOpenDirectoryDialog();
   }
 
-  async showOpenFileDialog(filters: FileFilter[]): Promise<string> {
+  async showOpenFileDialog(filters: FileFilter[], defaultPath?: string): Promise<string> {
     // @ts-expect-error Electron global variables
-    return await window.electron.showOpenFileDialog(filters);
+    return await window.electron.showOpenFileDialog(filters, defaultPath);
   }
 
   async exists(path: string): Promise<boolean> {

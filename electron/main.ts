@@ -34,8 +34,8 @@ app.whenReady().then(() => {
     return result.filePaths[0];
   });
 
-  ipcMain.handle('showOpenFileDialog', async (event: Electron.IpcMainInvokeEvent, filters: any[]) => {
-    const result = await dialog.showOpenDialog(mainWindow, { properties: ['openFile'], filters });
+  ipcMain.handle('showOpenFileDialog', async (event: Electron.IpcMainInvokeEvent, filters: any[], defaultPath?: string) => {
+    const result = await dialog.showOpenDialog(mainWindow, { properties: ['openFile'], filters, defaultPath });
     return result.filePaths[0];
   });
 
