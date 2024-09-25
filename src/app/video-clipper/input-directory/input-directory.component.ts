@@ -40,6 +40,10 @@ export class InputDirectoryComponent implements OnInit {
 
   private pathValidator(): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
+      if (!control.value) {
+        return null;
+      }
+
       const pathExists = await this.filesystemService.exists(control.value);
       if (!pathExists) {
         return { pathDoesNotExist: control.value };
