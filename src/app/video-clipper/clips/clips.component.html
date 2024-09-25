@@ -2,6 +2,9 @@
   <fieldset>
     <legend>Clips</legend>
     <button type="button" (click)="onCreateClipClick()">Create Clip</button>
+    @if (clips.hasError('required')) {
+      <div>Requires at least one clip.</div>
+    }
     <div class="clips">
       @for (clip of clips.controls; track clip.get('id')!.value) {
         <section class="clip" [formGroupName]="$index">
