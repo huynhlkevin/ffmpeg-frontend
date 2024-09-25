@@ -24,6 +24,11 @@ export class FilesystemService {
     // @ts-expect-error Electron global variables
     return await window.electron.isDirectory(path);
   }
+
+  async isFile(path: string): Promise<boolean> {
+    // @ts-expect-error Electron global variables
+    return await window.electron.isFile(path);
+  }
 }
 
 interface FileFilter {

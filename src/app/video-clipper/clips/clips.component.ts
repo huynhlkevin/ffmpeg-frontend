@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ControlContainer, FormArray, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { FilesystemService } from '../../services/filesystem/filesystem.service';
 import { v4 } from 'uuid';
 
@@ -29,7 +29,7 @@ export class ClipsComponent implements OnInit {
   onCreateClipClick(): void {
     const clip = this.formBuilder.group({
       id: [v4()],
-      sourceVideoFile: [''],
+      sourceVideoFile: this.formBuilder.control('', { asyncValidators: [this.filePathValidator()], updateOn: 'blur' }),
       startTime: [''],
       endTime: ['']
     });
@@ -55,6 +55,18 @@ export class ClipsComponent implements OnInit {
     if (file) {
       const sourceVideoFile = this.clips.get(`${index}.sourceVideoFile`) as FormControl;
       sourceVideoFile.setValue(file);
+    }
+  }
+
+  private filePathValidator(): AsyncValidatorFn {
+    return async (control: AbstractControl): Promise<ValidationErrors | null> => {
+      const pathExists = await this.filesystemService.exists(control.value);
+      if (!pathExists) {
+        return { pathDoesNotExist: control.value };
+      }
+
+      const isFile = await this.filesystemService.isFile(control.value);
+      return isFile ? null : { isNotFile: control.value };
     }
   }
 }

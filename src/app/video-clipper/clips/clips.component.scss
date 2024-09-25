@@ -18,10 +18,7 @@ fieldset {
 .clip div {
   display: flex;
   align-items: center;
-}
-
-.clip div > button {
-  margin-right: 0.5em;
+  gap: 0.5em;
 }
 
 .clip div > input {

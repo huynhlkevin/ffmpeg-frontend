@@ -54,6 +54,11 @@ app.whenReady().then(() => {
     return stat.isDirectory();
   });
 
+  ipcMain.handle('isFile', async (event: Electron.IpcMainInvokeEvent, path: string) => {
+    const stat = await fs.stat(path);
+    return stat.isFile();
+  });
+
   createWindow();
 });
 
