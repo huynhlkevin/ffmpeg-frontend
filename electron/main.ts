@@ -71,6 +71,10 @@ app.whenReady().then(() => {
     return path.join(...paths);
   });
 
+  ipcMain.handle('getDirName', async (event: Electron.IpcMainInvokeEvent, _path: string) => {
+    return path.dirname(_path)
+  });
+
   createWindow();
 });
 

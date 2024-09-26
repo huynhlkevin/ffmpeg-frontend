@@ -44,6 +44,11 @@ export class FilesystemService {
     // @ts-expect-error Electron global variables
     return await window.electron.joinPath(...paths);
   }
+
+  async getDirName(path: string): Promise<string> {
+    // @ts-expect-error Electron global variables
+    return await window.electron.getDirName(path);
+  }
 }
 
 interface FileFilter {

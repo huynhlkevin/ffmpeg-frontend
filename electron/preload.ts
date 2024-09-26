@@ -8,5 +8,6 @@ contextBridge.exposeInMainWorld('electron', {
   isDirectory: (path: string) => ipcRenderer.invoke('isDirectory', path),
   isFile: (path: string) => ipcRenderer.invoke('isFile', path),
   writeToFile: (path: string, data: string) => ipcRenderer.invoke('writeToFile', path, data),
-  joinPath: (...paths: string[]) => ipcRenderer.invoke('joinPath', ...paths)
+  joinPath: (...paths: string[]) => ipcRenderer.invoke('joinPath', ...paths),
+  getDirName: (path: string) => ipcRenderer.invoke('getDirName', path)
 });

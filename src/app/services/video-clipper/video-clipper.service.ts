@@ -12,13 +12,15 @@ export class VideoClipperService {
 
   async clip(data: VideoClipperData): Promise<void> {
     const ffmpegCommandBatch: string[] = [];
+    const dirName = await this.filesystemService.getDirName(data.outputFile);
+    const clipPrefix = await this.filesystemService.joinPath(dirName, 'Clip')
     for (const clip of data.clips) {
       const ffmpegCommand = [
         'ffmpeg',
         this.convertClip(clip),
         this.convertVideoEncoding(data.videoEncoding),
         this.convertAudioEncoding(data.audioEncoding),
-        `Clip${data.clips.indexOf(clip).toString().padStart(3, '0')}.mkv`
+        `"${clipPrefix}${data.clips.indexOf(clip).toString().padStart(3, '0')}.mkv"`
       ].join(' ')
       ffmpegCommandBatch.push(ffmpegCommand);
     }
@@ -27,7 +29,7 @@ export class VideoClipperService {
   }
 
   private convertClip(clip: Clip): string {
-    return `-ss ${clip.startTime} -i ${clip.sourceVideoFile} -t ${clip.duration}`;
+    return `-ss ${clip.startTime} -i "${clip.sourceVideoFile}" -t ${clip.duration}`;
   }
 
   private convertAudioEncoding(audioEncoding: AudioEncoding): string {
