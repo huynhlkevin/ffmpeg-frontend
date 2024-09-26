@@ -39,6 +39,11 @@ app.whenReady().then(() => {
     return result.filePaths[0];
   });
 
+  ipcMain.handle('showSaveFileDialog', async (event: Electron.IpcMainInvokeEvent, filters: any[]) => {
+    const result = await dialog.showSaveDialog(mainWindow, { properties: ['showOverwriteConfirmation'], filters });
+    return result.filePath;
+  });
+
   ipcMain.handle('pathExists', async (event: Electron.IpcMainInvokeEvent, path: string) => {
     try {
       await fs.access(path);
@@ -56,6 +61,14 @@ app.whenReady().then(() => {
   ipcMain.handle('isFile', async (event: Electron.IpcMainInvokeEvent, path: string) => {
     const stat = await fs.stat(path);
     return stat.isFile();
+  });
+
+  ipcMain.handle('writeToFile', async (event: Electron.IpcMainInvokeEvent, path: string, data: string) => {
+    await fs.writeFile(path, data);
+  });
+
+  ipcMain.handle('joinPath', async (event: Electron.IpcMainInvokeEvent, ...paths: string[]) => {
+    return path.join(...paths);
   });
 
   createWindow();
