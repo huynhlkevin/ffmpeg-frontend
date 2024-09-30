@@ -29,7 +29,7 @@ fieldset {
   width: 5em;
 }
 
-.ng-invalid:not(section)  {
+.ng-invalid:not(.clips-section)  {
   border: 3px solid red;
 }
 

@@ -1,4 +1,4 @@
-<section formArrayName="clips">
+<section class="clips-section" formArrayName="clips">
   <fieldset>
     <legend>Clips</legend>
     <button type="button" (click)="onCreateClipClick()">Create Clip</button>
@@ -25,18 +25,18 @@
               <label for="startTimeText">Start Time</label>
               <input id="startTimeText" type="text" formControlName="startTime"/>
               @if (clip.get('startTime')!.hasError('invalidTimeFormat')) {
-                <div>Invalid time format.</div>
+                <div class="errortext">Invalid time format</div>
               }
             </div>
             <div>
               <label for="endTimeText">End Time</label>
               <input id="endTimeText" type="text" formControlName="endTime"/>
               @if (clip.get('endTime')!.hasError('invalidTimeFormat')) {
-                <div>Invalid time format.</div>
+                <div class="errortext">Invalid time format</div>
               }
             </div>
             @if (clip.hasError('endTimeMustBeGreaterThanStartTime')) {
-              <div>End time must be greater than start time.</div>
+              <div class="errortext">End time must be greater than start time</div>
             }
             <button type="button" (click)="onDeleteClipClick($index)">Delete</button>
           </fieldset>
