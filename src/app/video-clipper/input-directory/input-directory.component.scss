@@ -7,3 +7,11 @@ fieldset {
 input {
   flex-grow: 1;
 }
+
+.ng-invalid:not(section)  {
+  border: 3px solid red;
+}
+
+.errortext {
+  color: red;
+}

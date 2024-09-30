@@ -4,9 +4,9 @@
     <button type="button" (click)="onSelectInputDirectoryClick()">Select Input Directory</button>
     <input type="text" formControlName="path"/>
     @if (path.hasError('pathDoesNotExist')) {
-      <div>Path does not exist.</div>
+      <div class="errortext">Path does not exist</div>
     } @else if (path.hasError('isNotDirectory')) {
-      <div>Not a directory.</div>
+      <div  class="errortext">Not a directory</div>
     }
   </fieldset>
 </section>
