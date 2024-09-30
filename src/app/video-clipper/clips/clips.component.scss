@@ -29,3 +29,10 @@ fieldset {
   width: 5em;
 }
 
+.ng-invalid:not(section)  {
+  border: 3px solid red;
+}
+
+.errortext {
+  color: red;
+}

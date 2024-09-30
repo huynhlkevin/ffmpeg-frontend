@@ -14,11 +14,11 @@
               <button type="button" (click)="onSelectSourceVideoFileClick($index)">Select Source Video File</button>
               <input type="text" formControlName="sourceVideoFile"/>
               @if (clip.get('sourceVideoFile')!.hasError('pathDoesNotExist')) {
-                <div>Path does not exist.</div>
+                <div class="errortext">Path does not exist</div>
               } @else if (clip.get('sourceVideoFile')!.hasError('isNotFile')) {
-                <div>Not a file.</div>
+                <div class="errortext">Not a file</div>
               } @else if (clip.get('sourceVideoFile')!.hasError('required')) {
-                <div>Required.</div>
+                <div class="errortext">Required</div>
               }
             </div>
             <div>
