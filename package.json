@@ -10,6 +10,7 @@
     "package": "npm run build:angular && npm run build:electron && electron-forge package",
     "make": "electron-forge make",
     "test": "ng test",
+    "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "lint": "ng lint"
   },
   "private": true,
