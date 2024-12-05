@@ -23,13 +23,12 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-      - name: Create distributable
-        id: make
-        run: npm run make
+      - name: Create package
+        run: npm run package
 
       - name: Create artifact
         uses: actions/upload-artifact@v4
         with:
           name: ffmpeg-frontend-${{ matrix.os == 'windows-latest' && 'windows' || 'linux' }}-v${{ github.run_number }}
-          path: ./out/make
+          path: ./out/
 
