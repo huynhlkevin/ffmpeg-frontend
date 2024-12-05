@@ -10,7 +10,7 @@
     "build:angular": "ng build --base-href=./",
     "debug": "npm run build:angular && concurrently --kill-others \"ng serve --watch --configuration development\" \"npm run start:electron\"",
     "package": "npm run build:angular && npm run build:electron && electron-forge package",
-    "make": "electron-forge make",
+    "make": "npm run build:angular && npm run build:electron && electron-forge make",
     "test": "ng test",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "lint": "ng lint"
