@@ -2,6 +2,8 @@
   "name": "ffmpeg-frontend",
   "version": "0.0.0",
   "main": "dist/main.js",
+  "description": "Generates FFMPEG commands for common tasks.",
+  "license": "GPL-3.0-only",
   "scripts": {
     "start:electron": "npm run build:electron && electron-forge start",
     "build:electron": "tsc --project tsconfig.json",
