@@ -27,11 +27,9 @@ jobs:
         id: make
         run: npm run make
 
-      - run: echo "$${{ steps.make.outputs }}"
-
       - name: Create artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ffmpeg-frontend-v${{ github.run_number }}
+          name: ffmpeg-frontend-${{ matrix.os == 'windows-latest' && 'windows' || 'linux' }}-v${{ github.run_number }}
           path: ./out/make
 
