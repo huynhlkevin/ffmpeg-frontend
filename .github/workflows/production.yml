@@ -24,7 +24,10 @@ jobs:
         run: npm ci
 
       - name: Create distributable
+        id: make
         run: npm run make
+
+      - run: echo "$${{ steps.make.outputs }}"
 
       - name: Create artifact
         uses: actions/upload-artifact@v4
