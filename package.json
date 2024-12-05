@@ -1,9 +1,12 @@
 {
   "name": "ffmpeg-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "dist/main.js",
   "description": "Generates FFMPEG commands for common tasks.",
   "license": "GPL-3.0-only",
+  "author": {
+    "name": "Kevin Huynh"
+  },
   "scripts": {
     "start:electron": "npm run build:electron && electron-forge start",
     "build:electron": "tsc --project tsconfig.json",
