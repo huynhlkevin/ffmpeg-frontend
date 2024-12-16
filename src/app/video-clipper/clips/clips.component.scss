@@ -1,0 +1,38 @@
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.clips {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+}
+
+.clip {
+  display: flex;
+  flex-flow: column;
+}
+
+.clip div {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.clip div > input {
+  flex: 1;
+}
+
+.clip div > label {
+  width: 5em;
+}
+
+.ng-invalid:not(.clips-section)  {
+  border: 3px solid red;
+}
+
+.errortext {
+  color: red;
+}
