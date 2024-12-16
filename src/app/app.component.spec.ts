@@ -16,9 +16,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'ffmpeg-frontend' title`, () => {
+  it(`should have the 'FFMPEG Frontend' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ffmpeg-frontend');
+    expect(app.title).toEqual('FFMPEG Frontend');
   });
 });
