@@ -1,0 +1,25 @@
+<section formGroupName="videoEncoding">
+  <fieldset>
+    <legend>Video Encoding</legend>
+    <div>
+      <label for="videoCodecSelect">Codec</label>
+      <select id="videoCodecSelect" formControlName="codec">
+        @for (codec of codecs; track $index) {
+          <option>{{codec}}</option>
+        }
+      </select>
+    </div>
+    <div>
+      <label for="videoPresetSelect">Preset</label>
+      <select id="videoPresetSelect" formControlName="preset">
+        @for (preset of presets; track $index) {
+          <option>{{preset}}</option>
+        }
+      </select>
+    </div>
+    <div>
+      <label for="videoQualityRange">Quality {{ quality.value }}</label>
+      <input id="videoQualityRange" type="range" [min]="minQuality" [max]="maxQuality" formControlName="quality"/>
+    </div>
+  </fieldset>
+</section>

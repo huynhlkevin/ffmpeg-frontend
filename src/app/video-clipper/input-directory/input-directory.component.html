@@ -1,0 +1,13 @@
+<section formGroupName="inputDirectory">
+  <fieldset>
+    <legend>Input Directory</legend>
+    <button type="button" (click)="onSelectInputDirectoryClick()">Select Input Directory</button>
+    <input type="text" formControlName="path"/>
+    @if (path.hasError('pathDoesNotExist')) {
+      <div class="errortext">Path does not exist</div>
+    } @else if (path.hasError('isNotDirectory')) {
+      <div  class="errortext">Not a directory</div>
+    }
+  </fieldset>
+</section>
+
