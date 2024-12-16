@@ -9,17 +9,16 @@ import { TimeFormatterService } from '../services/time-formatter/time-formatter.
 import { FilesystemService } from '../services/filesystem/filesystem.service';
 
 @Component({
-  selector: 'app-video-clipper',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    InputDirectoryComponent,
-    VideoEncodingComponent,
-    AudioEncodingComponent,
-    ClipsComponent
-  ],
-  templateUrl: './video-clipper.component.html',
-  styleUrl: './video-clipper.component.scss'
+    selector: 'app-video-clipper',
+    imports: [
+        ReactiveFormsModule,
+        InputDirectoryComponent,
+        VideoEncodingComponent,
+        AudioEncodingComponent,
+        ClipsComponent
+    ],
+    templateUrl: './video-clipper.component.html',
+    styleUrl: './video-clipper.component.scss'
 })
 export class VideoClipperComponent {
 

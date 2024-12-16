@@ -3,12 +3,11 @@ import { AbstractControl, AsyncValidatorFn, ControlContainer, FormBuilder, FormC
 import { FilesystemService } from '../../services/filesystem/filesystem.service';
 
 @Component({
-  selector: 'app-input-directory',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './input-directory.component.html',
-  styleUrl: './input-directory.component.scss',
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
+    selector: 'app-input-directory',
+    imports: [ReactiveFormsModule],
+    templateUrl: './input-directory.component.html',
+    styleUrl: './input-directory.component.scss',
+    viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class InputDirectoryComponent implements OnInit {
 

@@ -2,12 +2,11 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-video-encoding',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './video-encoding.component.html',
-  styleUrl: './video-encoding.component.scss',
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
+    selector: 'app-video-encoding',
+    imports: [ReactiveFormsModule],
+    templateUrl: './video-encoding.component.html',
+    styleUrl: './video-encoding.component.scss',
+    viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class VideoEncodingComponent implements OnInit, AfterViewInit  {
 
