@@ -2,12 +2,11 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-audio-encoding',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './audio-encoding.component.html',
-  styleUrl: './audio-encoding.component.scss',
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
+    selector: 'app-audio-encoding',
+    imports: [ReactiveFormsModule],
+    templateUrl: './audio-encoding.component.html',
+    styleUrl: './audio-encoding.component.scss',
+    viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class AudioEncodingComponent implements OnInit, AfterViewInit {
 

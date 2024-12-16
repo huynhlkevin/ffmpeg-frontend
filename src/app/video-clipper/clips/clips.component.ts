@@ -5,12 +5,11 @@ import { v4 } from 'uuid';
 import { TimeFormatterService } from '../../services/time-formatter/time-formatter.service';
 
 @Component({
-  selector: 'app-clips',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './clips.component.html',
-  styleUrl: './clips.component.scss',
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
+    selector: 'app-clips',
+    imports: [ReactiveFormsModule],
+    templateUrl: './clips.component.html',
+    styleUrl: './clips.component.scss',
+    viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class ClipsComponent implements OnInit {
 
