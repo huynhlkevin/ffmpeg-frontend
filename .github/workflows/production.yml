@@ -33,7 +33,7 @@ jobs:
           echo "value=$VALUE" >> "$GITHUB_OUTPUT"
 
       - name: Archive and compress output
-        run: tar -czf ffmpeg-frontend-linux-v${{ steps.version.outputs.value }}.tar.gz ./out/ffmpeg-frontend-linux-x64
+        run: tar -czf ffmpeg-frontend-linux-v${{ steps.version.outputs.value }}.tar.gz -C ./out/ .
 
       - name: Create release
         run: gh release create v${{ fromJSON(steps.version.outputs.value) }} ffmpeg-frontend-linux-v${{ steps.version.outputs.value }}.tar.gz
