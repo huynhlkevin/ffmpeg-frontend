@@ -7,6 +7,7 @@ let mainWindow: BrowserWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
+    title: "FFMPEG Frontend",
     width: 800,
     height: 600,
     webPreferences: {
