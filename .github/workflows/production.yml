@@ -53,8 +53,8 @@ jobs:
 
       - name: Archive and compress
         run: |
-          tar -czf ffmpeg-frontend-linux-v${{ fromJSON(steps.version.outputs.value) }}.tar.gz ./ubuntu-latest
-          7z a ffmpeg-frontend-windows-v${{ fromJSON(steps.version.outputs.value) }}.zip ./windows-latest
+          tar -czf ffmpeg-frontend-linux-v${{ fromJSON(steps.version.outputs.value) }}.tar.gz -C ./ubuntu-latest .
+          7z a ffmpeg-frontend-windows-v${{ fromJSON(steps.version.outputs.value) }}.zip ./windows-latest/*
 
       - name: Create release
         run: gh release create v${{ fromJSON(steps.version.outputs.value) }} ./ffmpeg-frontend-*
