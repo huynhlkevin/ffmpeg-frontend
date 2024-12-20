@@ -5,37 +5,58 @@ on:
     branches: [main]
 
 jobs:
-  production:
-    runs-on: ubuntu-latest
+  create_artifacts:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install node dependencies
+        run: npm ci
+
+      - name: Create package
+        run: npm run package
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}
+          path: ./out
+
+  create_release:
+    needs: [create_artifacts]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'npm'
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
 
-      - name: Install Node dependencies
-        run: npm ci
-
-      - name: Create package
-        run: npm run package
-
-      - name: Read Version
+      - name: Get version
         id: version
         run: |
           VALUE=$(jq ".version" package.json)
           echo "value=$VALUE" >> "$GITHUB_OUTPUT"
 
-      - name: Archive and compress output
-        run: tar -czf ffmpeg-frontend-linux-v${{ steps.version.outputs.value }}.tar.gz -C ./out/ .
+      - name: Archive and compress
+        run: |
+          tar -czf ffmpeg-frontend-linux-v${{ fromJSON(steps.version.outputs.value) }}.tar.gz ./ubuntu-latest
+          7z a ffmpeg-frontend-windows-v${{ fromJSON(steps.version.outputs.value) }}.zip ./windows-latest
 
       - name: Create release
-        run: gh release create v${{ fromJSON(steps.version.outputs.value) }} ffmpeg-frontend-linux-v${{ steps.version.outputs.value }}.tar.gz
+        run: gh release create v${{ fromJSON(steps.version.outputs.value) }} ./ffmpeg-frontend-*
         env:
           GH_TOKEN: ${{ github.token }}
