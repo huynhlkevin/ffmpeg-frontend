@@ -1,0 +1,20 @@
+fieldset {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+}
+
+div {
+  display: flex;
+  align-items: center;
+}
+
+label {
+  width: 5em;
+}
+
+label + * {
+  flex: 1;
+}
+
+

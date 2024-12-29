@@ -1,0 +1,17 @@
+fieldset {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+input {
+  flex-grow: 1;
+}
+
+.ng-invalid {
+  border: 3px solid red;
+}
+
+.errortext {
+  color: red;
+}

@@ -1,0 +1,33 @@
+name: Development
+
+on:
+  pull_request:
+
+jobs:
+  development:
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Create package
+        run: npm run package
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-frontend-linux-v${{ github.run_number }}
+          path: ./out/
