@@ -1,0 +1,18 @@
+.app {
+  display: flex;
+}
+
+.fixed-nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+
+main {
+  flex: 1;
+  margin-left: 7em;
+}
+
+.router-link-active {
+	color: red;
+}

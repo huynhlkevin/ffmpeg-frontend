@@ -1,0 +1,13 @@
+<section formGroupName="audioEncoding">
+  <fieldset>
+    <legend>Audio Encoding</legend>
+    <div>
+      <label for="audioCodecSelect">Codec</label>
+      <select id="audioCodecSelect" formControlName="codec">
+        @for (codec of codecs; track $index) {
+          <option>{{ codec }}</option>
+        }
+      </select>
+    </div>
+  </fieldset>
+</section>

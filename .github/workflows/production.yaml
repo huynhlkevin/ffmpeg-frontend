@@ -1,0 +1,63 @@
+name: Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  create_artifacts:
+    environment: production
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install node dependencies
+        run: npm ci
+
+      - name: Create package
+        run: npm run package
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}
+          path: ./out
+
+  create_release:
+    needs: [create_artifacts]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Get version
+        id: version
+        run: |
+          SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
+          VALUE=$(date +"%Y.%m.%d").$SHORT_SHA
+          echo "value=$VALUE" >> "$GITHUB_OUTPUT"
+
+      - name: Archive and compress
+        run: |
+          tar -czf ffmpeg-frontend-linux-${{ steps.version.outputs.value }}.tar.gz -C ./ubuntu-latest .
+          7z a ffmpeg-frontend-windows-${{ steps.version.outputs.value }}.zip ./windows-latest/*
+
+      - name: Create release
+        run: gh release create --generate-notes ${{ steps.version.outputs.value }} ./ffmpeg-frontend-*
+        env:
+          GH_TOKEN: ${{ github.token }}
