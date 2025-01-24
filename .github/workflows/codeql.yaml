@@ -79,11 +79,19 @@ jobs:
     # to build your code.
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-    - if: matrix.build-mode == 'manual'
+    - name: Install Qt
+      if: matrix.build-mode == 'manual'
+      uses: jurplel/install-qt-action@v4
+      with:
+        cache: true
+        version: 6.5.*
+
+    - name: Build code
+      if: matrix.build-mode == 'manual'
       shell: bash
       run: cmake . && make
-
-
+      env: 
+        CMAKE_PREFIX_PATH: ${{ env.QT_ROOT_DIR }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
