@@ -15,7 +15,6 @@ on:
   push:
     branches:
       - main
-      - codeql-workflow
   pull_request:
     branches:
       - main
