@@ -90,8 +90,6 @@ jobs:
       if: matrix.build-mode == 'manual'
       shell: bash
       run: cmake . && make
-      env: 
-        CMAKE_PREFIX_PATH: ${{ env.QT_ROOT_DIR }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
