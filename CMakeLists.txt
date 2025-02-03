@@ -13,7 +13,7 @@ qt_add_executable(appffmpeg-frontend
 )
 
 qt_add_qml_module(appffmpeg-frontend
-    URI ffmpeg-frontend
+    URI ffmpeg_frontend
     VERSION 1.0
     QML_FILES
         Main.qml
