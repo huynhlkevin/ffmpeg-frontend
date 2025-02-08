@@ -1,9 +1,10 @@
+#include "AudioEncodingSettings.h"
 #include "VideoEncodingSettings.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QGuiApplication app{ argc, argv };
 
@@ -13,8 +14,10 @@ int main(int argc, char *argv[])
                      &app, []() { QCoreApplication::exit(-1); },
     Qt::QueuedConnection);
 
+    const AudioEncodingSettings audioEncodingSettings{};
     const VideoEncodingSettings videoEncodingSettings{};
     engine.setInitialProperties({
+        { "audioEncodingSettings", QVariant::fromValue(&audioEncodingSettings) },
         { "videoEncodingSettings", QVariant::fromValue(&videoEncodingSettings) }
     });
 

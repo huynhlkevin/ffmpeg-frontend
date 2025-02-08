@@ -1,7 +1,7 @@
 #include "VideoEncodingSettings.h"
 
-VideoEncodingSettings::VideoEncodingSettings(QObject *parent)
-    : QObject{parent}
+VideoEncodingSettings::VideoEncodingSettings(QObject* parent)
+    : QObject{ parent }
 {
 
 }

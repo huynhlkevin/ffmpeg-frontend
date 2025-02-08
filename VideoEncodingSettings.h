@@ -21,7 +21,7 @@ class VideoEncodingSettings : public QObject
     Q_PROPERTY(int minQuality READ minQuality CONSTANT FINAL)
 
 public:
-    explicit VideoEncodingSettings(QObject *parent = nullptr);
+    explicit VideoEncodingSettings(QObject* parent = nullptr);
 
     const QStringList& codecs() const { return m_codecs; }
     const QString& codec() const { return m_codec; }

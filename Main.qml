@@ -5,6 +5,7 @@ import QtQuick.Layouts
 ApplicationWindow {
     id: root
 
+    required property AudioEncodingSettings audioEncodingSettings
     required property VideoEncodingSettings videoEncodingSettings
 
     width: 640
@@ -62,6 +63,26 @@ ApplicationWindow {
                     value: root.videoEncodingSettings.quality
                     stepSize: 1
                     onValueChanged: root.videoEncodingSettings.quality = value
+                    Layout.fillWidth: true
+                }
+            }
+        }
+
+        GroupBox {
+            title: qsTr("Audio Encoding Settings")
+            Layout.fillWidth: true
+
+            GridLayout {
+                anchors.fill: parent
+                columns: 2
+
+                Text {
+                    text: qsTr("Codec")
+                    Layout.preferredWidth: 75
+                }
+                ComboBox {
+                    model: root.audioEncodingSettings.codecs
+                    onCurrentTextChanged: root.audioEncodingSettings.codec = currentText
                     Layout.fillWidth: true
                 }
             }
