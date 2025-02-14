@@ -19,6 +19,7 @@ qt_add_qml_module(${PROJECT_NAME}
         Main.qml
         AudioEncodingSettingsView.qml
         ClipsView.qml
+        VideoEncodingSettingsView.qml
     SOURCES
         VideoEncodingSettings.h VideoEncodingSettings.cpp
         AudioEncodingSettings.h AudioEncodingSettings.cpp
