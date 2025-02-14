@@ -71,24 +71,8 @@ ApplicationWindow {
             }
         }
 
-        GroupBox {
-            title: qsTr("Audio Encoding Settings")
-            Layout.fillWidth: true
-
-            GridLayout {
-                columns: 2
-                anchors.fill: parent
-
-                Text {
-                    text: qsTr("Codec")
-                    Layout.preferredWidth: 75
-                }
-                ComboBox {
-                    model: root.audioEncodingSettings.codecs
-                    onCurrentTextChanged: root.audioEncodingSettings.codec = currentText
-                    Layout.fillWidth: true
-                }
-            }
+        AudioEncodingSettingsView {
+            settings: root.audioEncodingSettings
         }
 
         ClipsView {
