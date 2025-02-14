@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Dialogs
 import QtQuick.Layouts
 
 ApplicationWindow {
@@ -7,15 +8,17 @@ ApplicationWindow {
 
     required property AudioEncodingSettings audioEncodingSettings
     required property VideoEncodingSettings videoEncodingSettings
+    required property Clips clips
 
-    width: 640
-    height: 480
+    width: 600
+    height: 600
     visible: true
     title: qsTr("FFmpeg")
 
     menuBar: MenuBar {
         Menu {
             title: qsTr("&File")
+
             Action {
                 text: qsTr("&Quit")
                 onTriggered: root.close()
@@ -31,8 +34,8 @@ ApplicationWindow {
             Layout.fillWidth: true
 
             GridLayout {
-                anchors.fill: parent
                 columns: 2
+                anchors.fill: parent
 
                 Text {
                     text: qsTr("Codec")
@@ -73,8 +76,8 @@ ApplicationWindow {
             Layout.fillWidth: true
 
             GridLayout {
-                anchors.fill: parent
                 columns: 2
+                anchors.fill: parent
 
                 Text {
                     text: qsTr("Codec")
@@ -86,6 +89,10 @@ ApplicationWindow {
                     Layout.fillWidth: true
                 }
             }
+        }
+
+        ClipsView {
+            clips: root.clips
         }
 
         Button {

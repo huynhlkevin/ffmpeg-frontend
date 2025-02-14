@@ -17,8 +17,13 @@ qt_add_qml_module(${PROJECT_NAME}
     VERSION 1.0
     QML_FILES
         Main.qml
-        SOURCES VideoEncodingSettings.h VideoEncodingSettings.cpp
-        SOURCES AudioEncodingSettings.h AudioEncodingSettings.cpp
+        ClipsView.qml
+    SOURCES
+        VideoEncodingSettings.h VideoEncodingSettings.cpp
+        AudioEncodingSettings.h AudioEncodingSettings.cpp
+        Clips.h Clips.cpp
+        Clip.h Clip.cpp
+        Timestamp.h Timestamp.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
